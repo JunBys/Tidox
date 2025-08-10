@@ -71,7 +71,17 @@ func (t *Task) GetTaskOldByID(id int) TaskDataList {
 	return t.getTaskByID(id, &t.TaskOld)
 }
 
-// 根据时间范围查询Task, useCreateTime false时使用modify时间匹配
+// 根据时间范围查询TaskNew, useCreateTime false时使用modify时间匹配
 func (t *Task) GetTaskNewByTime(s, d time.Time, useCreateTime bool) TaskDataList {
 	return t.getTaskByTime(s, d, useCreateTime, &t.TaskNew)
+}
+
+// 根据时间范围查询TaskNow, useCreateTime false时使用modify时间匹配
+func (t *Task) GetTaskNowByTime(s, d time.Time, useCreateTime bool) TaskDataList {
+	return t.getTaskByTime(s, d, useCreateTime, &t.TaskNow)
+}
+
+// 根据时间范围查询TaskOld, useCreateTime false时使用modify时间匹配
+func (t *Task) GetTaskOldByTime(s, d time.Time, useCreateTime bool) TaskDataList {
+	return t.getTaskByTime(s, d, useCreateTime, &t.TaskOld)
 }
