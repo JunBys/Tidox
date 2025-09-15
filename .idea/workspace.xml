@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9aa8fea3-570b-4f87-91dc-938dbeda1af5" name="更改" comment="one commit" />
+    <list default="true" id="9aa8fea3-570b-4f87-91dc-938dbeda1af5" name="更改" comment="one commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/aa.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/aa.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "JunBys"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/JunBys/Tidox.git",
+    "accountId": "32f38815-9ab5-45ea-bda2-942cd33ecfb9"
+  }
+}]]></component>
   <component name="HttpClientEndpointsTabState">
     <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;4230ad66cb335c633828fe438e9e5544b64d9990&quot; value=&quot;###&amp;#10;GET http://localhost:8000/index&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
