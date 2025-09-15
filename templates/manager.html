@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html manual-theme="light" lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tidox</title>
+        <!-- 告诉浏览器：此页面支持亮/暗两套配色，避免初次渲染闪白 -->
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" type="text/css" href="/static/css/color.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/font-awesome/font-awesome.css" />
+
+        <script src="/static/js/htmx.js"></script>
+        <script src="/static/js/Sortable.min.js"></script>
+    </head>
+
+    <body>
+        <!-- 左侧pannel -->
+        <div id="left-panel" class="left-panel">
+            <div hx-trigger="load"
+                 hx-target="#left-panel"
+                 hx-post="/front/leftPanel"
+                 hx-vals='{
+                    "now": "left-panel-task-activ",
+                    "info_url": "/backend/nowTask"
+                 }'>
+            </div>
+        </div>
+
+        <!-- 右侧信息区 -->
+        <div id="rige-display" class="task"> </div>
+
+
+<!-- js区域 -->
+<!-- 卡片气泡 -->
+<script>
+    function bindMenuBubbles() {
+        document.querySelectorAll('.menu-container').forEach(container => {
+            // 避免重复绑定
+            if (container.dataset.bound) return;
+            container.dataset.bound = 'true';
+
+            const btn = container.querySelector('.menu-btn');
+            const bubble = container.querySelector('.menu-bubble');
+
+            if (!btn || !bubble) return;
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // 关闭其他打开的菜单
+                document.querySelectorAll('.menu-container.active').forEach(c => {
+                    if (c !== container) c.classList.remove('active');
+                });
+
+                // 切换当前菜单显示状态
+                container.classList.toggle('active');
+
+                if (container.classList.contains('active')) {
+                    // 根据空间自动调整方向
+                    bubble.className = 'menu-bubble'; // 重置方向
+
+                    const rect = btn.getBoundingClientRect();
+                    const spaceTop = rect.top;
+                    const spaceBottom = window.innerHeight - rect.bottom;
+                    const spaceLeft = rect.left;
+                    const spaceRight = window.innerWidth - rect.right;
+
+                    let direction = 'right'; // 默认右边
+
+                    if (spaceRight < 150 && spaceLeft > spaceRight) direction = 'left';
+                    if (spaceBottom < 120 && spaceTop > spaceBottom) direction = 'top';
+                    if (spaceTop < 120 && spaceBottom > spaceTop) direction = 'bottom';
+
+                    bubble.classList.add(direction);
+                }
+            });
+        });
+    }
+
+    // 点击空白处关闭菜单
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.menu-container.active').forEach(c => c.classList.remove('active'));
+    });
+
+    // 页面初次加载绑定
+    document.addEventListener('DOMContentLoaded', bindMenuBubbles);
+
+    // htmx 异步加载后重新绑定
+    document.body.addEventListener('htmx:afterSwap', bindMenuBubbles);
+
+</script>
+
+
+<!-- 拖动排序 -->
+<script>
+    function initSortable() {
+        let sortableEl = document.getElementById('sortable');
+        if (!sortableEl) return;  // 没有目标元素就退出，避免报错
+
+        new Sortable(sortableEl, {
+            animation: 300,
+            ghostClass: 'ghost-card',   // 幽灵卡片样式
+            dragClass: 'dragging-card', // 拖动时原始卡片样式
+            handle: '.toggle-btn-top',
+            direction: 'vertical',
+            onEnd: function (evt) {
+                // 恢复所有卡片的透明度
+                document.querySelectorAll('#sortable li').forEach(el => {
+                    el.style.opacity = '1';
+                });
+
+                let items = document.querySelectorAll('#sortable li');
+                let order = Array.from(items).map(item => item.getAttribute('data-id'));
+                sendOrder(order);
+            },
+            onStart: function(evt) {
+                evt.item.style.opacity = '0.4';
+            }
+        });
+    }
+
+    function sendOrder(order) {
+        fetch('/putstat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    // 1. 页面初次加载时尝试初始化
+    document.addEventListener('DOMContentLoaded', initSortable);
+
+    // 2. htmx 内容加载/替换后，再次初始化
+    document.body.addEventListener('htmx:afterSwap', function(evt) {
+        initSortable();
+    });
+</script>
+
+
+    </body>
+</html>
+
+

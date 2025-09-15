@@ -1,0 +1,98 @@
+<div>
+    <div class="title-font">Tidox</div>
+
+    <!-- 代办清单 -->
+    <div id="left-new" class="left-panel-task {{.new}}"
+         hx-target="#left-panel"
+         hx-post="/front/leftPanel"
+         hx-vals='{
+            "new": "left-panel-task-activ",
+             "info_url": "/backend/newTask"
+         }'
+    >
+        <div >
+            <i class="fas fa-list-ul"></i>
+            <span style="margin-left: 10px;">代办</span>
+        </div>
+        <div class="left-panel-task-sum">3</div>
+    </div>
+
+    <!-- 当前 -->
+    <div class="left-panel-task {{.now}}"
+         hx-target="#left-panel"
+         hx-post="/front/leftPanel"
+         hx-vals='{
+            "now": "left-panel-task-activ",
+            "info_url": "/backend/nowTask"
+         }'
+    >
+        <div>
+            <i class="fas fa-tasks"></i>
+            <span style="margin-left: 10px;">当前</span>
+        </div>
+        <div class="left-panel-task-sum">7</div>
+    </div>
+
+    <!-- 已完成 -->
+    <div class="left-panel-task {{.old}}"
+         hx-target="#left-panel"
+         hx-post="/front/leftPanel"
+         hx-vals='{
+            "old": "left-panel-task-activ",
+            "info_url": "/backend/oldTask"
+         }'
+    >
+        <div>
+            <i class="fa-solid fa-check"></i>
+            <span style="margin-left: 10px;">已完成</span>
+        </div>
+        <div class="left-panel-task-sum">33393</div>
+    </div>
+
+    <!-- 中间横线 -->
+    <hr class="left-pannel-hr">
+
+    <!-- 今天 -->
+    <div class="left-panel-task {{.day}}">
+        <div>
+            <i class="fas fa-calendar-day"></i>
+            <span style="margin-left: 10px;">今日</span>
+        </div>
+        <div class="left-panel-task-sum">4</div>
+    </div>
+
+    <!-- 报表 -->
+    <div class="left-panel-task {{.statement}}">
+        <div>
+            <i class="fas fa-chart-line"></i>
+            <span style="margin-left: 10px;">周报表</span>
+        </div>
+        <div class="left-panel-task-sum">11</div>
+    </div>
+
+    <!-- 推送日志 -->
+    <div class="left-panel-task {{.push}}">
+        <div>
+            <i class="fas fa-paper-plane"></i>
+            <span style="margin-left: 10px;">推送日志</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="left-panel-task" style="cursor: default;">
+    <p class="sidebar-button" style="cursor: pointer;">
+        <i class="fas fa-cog"></i> 设置
+    </p>
+    <p class="sidebar-button" style="cursor: pointer;">
+        <i class="fas fa-adjust"></i> 主题
+    </p>
+</div>
+
+
+<!-- 关联自动加载右侧卡片模板 -->
+<div hx-get="{{.info_url}}"
+     hx-trigger="load"
+     hx-target="#rige-display"
+     hidden>
+</div>

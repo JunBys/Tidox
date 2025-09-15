@@ -1,0 +1,64 @@
+<!-- 任务卡片 -->
+<ul id="sortable">
+
+    {{ range $n, $i := .data }}
+
+    <li data-id="{{ $n }}">
+        <div class="card">
+            <div class="card-left">
+                <div class="drag-handle">
+                    <i class="fas fa-grip-vertical toggle-btn-top"></i>
+                </div>
+
+                <!-- 复选框 -->
+                <div class="toggle-btn-group">
+                    <label class="toggle-btn">
+                        <input type="checkbox">
+                        <i class="fa-regular fa-circle"></i>
+                        <i class="fa-solid fa-circle-check"></i>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="card-center">
+                <input type="text" class="card-input" value="{{ $i.Name }}">
+                <!-- 子任务 -->
+                <div >
+                    <i class="fa-solid fa-circle task-icon" style="font-size: 8px; margin-left: 15px; color: #606060;"></i>
+                    <input type="text" class="card-input-slave" value="任务没完成 ">
+                </div>
+
+                <!-- 描述 -->
+                <div class="card-status">
+                    <div style="width: 180px;">
+                        <span class="card-status-tag" style="color: #111;">Add:</span>
+                        <span class="card-status-tag-rige">{{ $i.CreateTime }}</span>
+                    </div>
+                    <div style="width: 160px;">
+                        <span class="card-status-tag" style="background: rgb(20, 111, 69);">Mod:</span>
+                        <span class="card-status-tag-rige">{{ $i.ModifyTime }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 功能区 -->
+            <div class="card-rige">
+                <i class="far fa-flag" style="margin: 0 16px;"></i>
+                <div class="menu-container">
+                    <!-- <button class="menu-btn">按钮 1</button> -->
+                    <i class="menu-btn fa-solid fa-ellipsis"></i>
+                    <div class="menu-bubble">
+                        <a href="#">重办任务</a>
+                        <a href="#" style="color: #c11515;">删除</a>
+                        <a href="#">备注</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </li>
+
+    {{end}}
+
+</ul>

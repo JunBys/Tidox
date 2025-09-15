@@ -1,0 +1,348 @@
+
+body {
+    background: var(--bg);
+    color: var(--font-black);
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* 禁止缩放移动端 */
+   font-family: Arial, sans-serif;  
+}
+
+/* 左侧任务栏 */
+.left-panel {
+    width: 200px;
+    height: 100vh;
+    top: 0vh;
+    left: 0vh;
+    padding:    0px 20px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--left-pannel-bg);
+    box-shadow: var(--left-pannel-shadow);
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* 程序title的字体样式 */
+.title-font {
+    cursor: default;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 左侧任务菜单 */
+.left-panel-task {
+    cursor: pointer; 
+    color: var(--font-grey);
+    font-weight: 500;
+    height: 45px;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* 左侧任务菜单-激活任务 */
+.left-panel-task-activ{
+    color: var(--font-black);
+    background: var(--bg);
+    font-weight: 650;
+}
+
+/* 左侧任务菜单-任务数 */
+.left-panel-task-sum {
+    color: var(--font-grey);
+    font-size: 13px;
+    height: 22px;
+    padding: 0 10px;
+    border-radius: 15px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+}
+/* 左侧任务蓝中间横线 */
+.left-pannel-hr {
+    border: none;   
+    border-top: 2px solid var(--bg);
+    margin: 25px -5px 10px -5px;
+}
+
+/* 底部按钮 */
+.sidebar-button {
+    font-weight: 400;
+    font-size: 15px;
+    height: 40px;
+    width: 50px;
+    height: 20px;
+    /* background: #000; */
+    border-radius: 8px;
+    padding: 0 10px;
+    margin-bottom: 30px;
+    color: var(--font-black);
+}
+
+/* 卡片区域大小 */
+.task {
+    width: calc(100% - 320px);
+    margin-left: 270px;
+    min-width: 460px;
+}
+
+/* 卡片 */
+.card {
+    width: 100%;
+    /* height: 90px; */
+    border-radius: 10px;
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    margin: 20px 0 20px 0;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.card-left {
+    width: 55px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+}
+.card-center {
+    width: 100%;
+    margin: 0 5px 0 5px;
+}
+.card-rige{
+    color: var(--font-grey);
+    width: 90px;
+    font-size: 20px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.card-input {
+    font-weight: 500;
+    font-size: 1.1em;
+    line-height: 1.3;
+    cursor: text;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--font-grey);
+    outline: none;
+    padding: 5px 5px 3px 5px;
+    user-select: text;
+    width: 98%;
+    transition: border-color 0.3s ease;
+}
+.card-input:focus {
+    /* color: #0e8cc2; */
+    border-color: var(--input-border-color);
+}
+
+.card-input-slave {
+    font-weight: 420;
+    font-size: 1.0em;
+    line-height: 1.3;
+    cursor: text;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--font-grey);
+    outline: none;
+    padding: 5px 5px 3px 8px;
+    /* margin-left: 15px; */
+    margin-bottom: -6px;
+    user-select: text;  
+    width: calc(100% - 50px);
+    /* width: 20px; */
+    transition: border-color 0.3s ease;
+}
+.card-input-slave:focus {
+    /* color: #0e8cc2; */
+    border-color: var(--input-border-color);
+    background: var(--input-bg);
+}
+
+.card-status {
+    font-size: 12px;
+    /* color: var(--font-grey); */
+    margin-top: 15px;
+    display: flex;
+}
+.card-status-tag {  
+    font-size: 12px;
+    /* background:#ff948b; */
+    background:rgb(255, 203, 47);;
+    color: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 4px 0 0 4px;
+    margin-left: 5px;
+    user-select: text;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+}
+.card-status-tag-rige {
+    font-size: 12px;
+    background:var(--input-bg);
+    padding: 2px 8px;
+    border-radius: 0 4px 4px 0;
+    margin-left: -4px;
+    user-select: text;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.toggle-btn-top {
+    size: 12px;  
+    color: var(--bg-mouse); 
+    /* margin-top: 5px; */
+    margin-bottom: -15px;
+}
+
+.toggle-btn-group {
+  /* background: #000; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+/* 卡片复选框 */
+.toggle-btn {
+  font-size: 22px;    /* 图标大小 */
+  color: var(--font-grey);
+  cursor: pointer;
+  margin: 10px;
+}
+/* 隐藏原始checkbox */
+.toggle-btn input {
+  display: none;
+}
+/* 默认显示 空心圆 */
+.toggle-btn .fa-circle {
+  display: inline;
+}
+.toggle-btn .fa-circle-check {
+  display: none;
+}
+/* 选中时切换为实心对勾圆 */
+.toggle-btn input:checked ~ .fa-circle {
+  display: none;
+}
+.toggle-btn input:checked ~ .fa-circle-check {
+  display: inline;
+}
+
+/* 卡片气泡 */
+  .menu-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .menu-btn {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* 气泡菜单基础样式 */
+  .menu-bubble {
+    position: absolute;
+    background: var(--card-bg);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: var(--card-shadow);
+    min-width: 90px;
+    display: none; /* 默认隐藏 */
+    z-index: 100;
+  }
+  /* 显示状态 */
+  .menu-container.active .menu-bubble {
+    display: block;
+  }
+  /* 四个方向样式 */
+  .menu-bubble.right {
+    top: 50%;
+    left: calc(100% + 8px);
+    transform: translateY(-50%);
+  }
+  .menu-bubble.left {
+    top: 50%;
+    right: calc(100% + 8px);
+    transform: translateY(-50%);
+  }
+  .menu-bubble.top {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .menu-bubble.bottom {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+    /* 菜单项 */
+  .menu-bubble a {
+    font-size: 16px;
+    display: block;
+    padding: 6px 10px;
+    text-decoration: none;
+    color: var(--font-black);
+    border-radius: 5px;
+  }
+  .menu-bubble a:hover {
+    background: var(--bg);
+  }
+/* 卡片气泡结束 */
+
+
+/* 拖动卡片样式 */
+/* 添加幽灵卡片样式 */
+.ghost-card {
+    opacity: 0 !important;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    cursor: grab;  
+}
+/* 拖动时原始卡片样式 */
+.dragging-card {
+    opacity: 1;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+/* 只有拖动把手才能拖动 */
+.drag-handle{
+    cursor: grab;       /* 鼠标手型 */
+    display: inline-flex;
+    width: 10px;
+    height: 18px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    margin-left: 5px;
+}

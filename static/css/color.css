@@ -1,0 +1,36 @@
+/* 默认明亮主题变量表 */
+:root {
+    /* 让原生控件、滚动条等也跟随主题 */
+    color-scheme: light dark;
+
+    --bg: #eee;
+    --font-black: #454545;
+    --font-grey: #626161;
+    --left-pannel-bg: #FCFCFC;
+    --card-bg: #FCFCFC;
+    --left-pannel-shadow: 0 0 10px rgba(159, 159, 159, 0.351);
+    --card-shadow: 0 0 10px  rgba(159, 159, 159, 0.351);
+    --input-border-color: #036cb1;
+    --input-bg: #036bb11b;
+    --bg-mouse: #cccccc;
+}
+
+/* 手动强制亮色变量表，html标签添加属性 */
+:root[manual-theme="light"] {
+    --bg: #eee;
+    --font-black: #2d2d2d;
+    --left-pannel-bg: #FCFCFC;
+    --left-pannel-shadow: 0 0 10px rgba(159, 159, 159, 0.351);
+}
+
+/* 自动随系统切换暗色变量表 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #333;
+    }
+}
+
+/* 手动强制暗色变量表，html标签添加属性 */
+:root[manual-theme="dark"] {
+        --bg: #333;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>垂直拖动排序示例</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+    }
+
+    #sortable {
+      max-width: 600px;
+      margin: auto;
+      list-style: none;
+      padding: 0;
+    }
+
+    #sortable li {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      background: #fff;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease; /* 卡片移动动画 */
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .drag-handle {
+      cursor: grab;
+      margin-right: 12px;
+      color: #999;
+    }
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .card-center {
+      flex: 1;
+    }
+
+    .card-center input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      padding: 4px 0;
+      background: transparent;
+    }
+
+    .card-rige {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 拖动幽灵卡片 */
+    .ghost-card {
+      opacity: 0.9;
+      background: #e6f0ff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    /* 拖动时真实卡片半透明 */
+    .dragging-card {
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">拖动按钮进行排序</h2>
+
+<ul id="sortable">
+  <li data-id="1">
+    <div class="card-left">
+      <i class="fas fa-grip-vertical drag-handle"></i>
+    </div>
+    <div class="card-center">
+      <input type="text" value="申请 Ansible 策略">
+    </div>
+    <div class="card-rige">
+      <i class="far fa-flag"></i>
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+  </li>
+
+  <li data-id="2">
+    <div class="card-left">
+      <i class="fas fa-grip-vertical drag-handle"></i>
+    </div>
+    <div class="card-center">
+      <input type="text" value="写日报">
+    </div>
+    <div class="card-rige">
+      <i class="far fa-flag"></i>
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+  </li>
+
+  <li data-id="3">
+    <div class="card-left">
+      <i class="fas fa-grip-vertical drag-handle"></i>
+    </div>
+    <div class="card-center">
+      <input type="text" value="准备会议资料">
+    </div>
+    <div class="card-rige">
+      <i class="far fa-flag"></i>
+      <i class="fas fa-ellipsis-v"></i>
+    </div>
+  </li>
+</ul>
+
+<!-- SortableJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sortable = new Sortable(document.getElementById('sortable'), {
+        animation: 1000,                 // 卡片移动动画
+        ghostClass: 'ghost-card',       // 幽灵卡片
+        chosenClass: 'dragging-card',   // 拖动时真实卡片透明
+        direction: 'vertical',          // 只能垂直拖动
+        handle: '.drag-handle',         // 只能通过 grip 拖动
+        onStart: function(evt) {
+            evt.item.style.opacity = '0.4'; // 拖动开始
+        },
+        onEnd: function(evt) {
+            // 恢复透明度
+            document.querySelectorAll('#sortable li').forEach(el => el.style.opacity = '1');
+
+            // 获取最新顺序
+            const items = document.querySelectorAll('#sortable li');
+            const order = Array.from(items).map(item => item.getAttribute('data-id'));
+            console.log('最新顺序:', order);
+
+            // 示例：发送到服务器
+            // sendOrder(order);
+        }
+    });
+
+    function sendOrder(order) {
+        fetch('/putstat', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(order)
+        })
+        .then(res => res.json())
+        .then(data => console.log('Success:', data))
+        .catch(err => console.error('Error:', err));
+    }
+});
+</script>
+
+</body>
+</html>
